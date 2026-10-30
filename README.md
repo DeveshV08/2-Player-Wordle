@@ -26,8 +26,8 @@ Tech Stack:
 - Storing Data: Text files
 
 Future Plans: 
-- Add automatic role switching after each round.
-- Implement a scoreboard that tracks wins.
+- Convert it into a GUI
+- Add animations and special effects.
 - Implement a points system based on number of guesses.
 
 
