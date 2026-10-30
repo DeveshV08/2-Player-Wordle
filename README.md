@@ -20,10 +20,10 @@ Chunked Build Plan:
 8. Update the scoreboard after each round
 
 Tech Stack:
-Language: Java
-External tools: Dictionary API, GitHub
-libraries: ArrayList, Random
-Storing Data: Text files
+- Language: Java
+- External tools: Dictionary API, GitHub
+- libraries: ArrayList, Random
+- Storing Data: Text files
 
 Future Plans: 
 - Add automatic role switching after each round.
