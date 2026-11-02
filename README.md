@@ -28,7 +28,7 @@ Tech Stack:
 Future Plans: 
 - Convert it into a GUI
 - Add animations and special effects.
-- Implement a points system based on number of guesses.
+- Create an online multiplayer system
 
 
 
