@@ -68,7 +68,37 @@ public class Wordle {
 
         IO.println("Thank you for selecting your secret word!");
 
+        IO.println();
+        IO.println();
+        IO.println();
+        IO.println();
+        IO.println();
 
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        IO.println("Player 2: You have 6 tries to guess the secret word");
+
+        boolean wordGuessed = false;
+        int guesses = 0;
+        String guess = "";
+
+        while (wordGuessed == false && guesses < 6) {
+
+            IO.println();
+            guess = IO.readln("Guess: ").toLowerCase();
+            IO.println();
+
+            if (guess.equals(word)) {
+                wordGuessed = true;
+                IO.println("Congrats! You have successfully guessed the secret word");
+            }
+
+            guesses++;
+        }
 
     }
 

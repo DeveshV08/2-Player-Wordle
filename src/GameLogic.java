@@ -3,7 +3,6 @@ import java.io.*;
 public class GameLogic {
 
    private int guesses;
-   private int guessesLeft;
    private String secretWord;
    private int wordLength;
 
@@ -11,7 +10,6 @@ public class GameLogic {
    public GameLogic(int guesses, int wordLength, String secretWord) {
        this.guesses = guesses;
        this.secretWord = secretWord;
-       this.guessesLeft = guesses;
        this.wordLength = wordLength;
    }
 
