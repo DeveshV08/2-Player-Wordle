@@ -10,12 +10,6 @@ public class Wordle {
         String GRAY = "\u001B[90m";
         String RESET = "\u001B[0m";
 
-        int[] Alphabets = new int[26];
-
-        for (int i = 0; i < 26; i++) {
-            Alphabets[i] = 0;
-        }
-
         IO.println("Welcome to 2-Player Wordle!");
         IO.println();
 
@@ -99,33 +93,11 @@ public class Wordle {
         IO.println();
         IO.println();
 
-        int index = 97;
-        int arrayIndex = 0;
-
-        for (int i = 0; i < word.length(); i++) {
-            arrayIndex = 0;
-            index = 97;
-            for (int j = 0; j < word.length(); j++) {
-                while (index < 123) {
-                    if (word.charAt(i) == ((char) index)) {
-                        Alphabets[arrayIndex]++;
-                        arrayIndex++;
-                        index++;
-                    } else {
-                        arrayIndex++;
-                        index++;
-                    }
-                }
-            }
-        }
-
-
         try {
             Thread.sleep(1000);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
         IO.println("Player 2: You have 6 tries to guess the secret word");
 
@@ -136,19 +108,87 @@ public class Wordle {
         while (wordGuessed == false && guesses < 6) {
 
             IO.println();
-            guess = IO.readln("Guess: ").toLowerCase();
+            guess = IO.readln("Guess:\n").toLowerCase();
             IO.println();
 
+            while (letters != guess.length()) {
+                IO.println("Sorry! the length of your guess does not match the number of words you are playing for");
+                IO.println();
+                try {
+                    Thread.sleep(3000);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                guess = IO.readln("Guess:\n").toLowerCase();
+            }
 
+            while (GameLogic.WordExists(guess) == false) {
+                IO.println("Your selected word does not exist, try again!");
+                IO.println();
+                try {
+                    Thread.sleep(3000);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                IO.println();
+                guess = IO.readln("Guess:\n").toLowerCase();
+
+                while (letters != guess.length()) {
+                    IO.println("Sorry! the length of your guess does not match the number of words you are playing for");
+                    IO.println();
+                    try {
+                        Thread.sleep(3000);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    IO.println();
+                    guess = IO.readln("Guess:\n").toLowerCase();
+                }
+            }
 
             if (guess.equals(word)) {
                 wordGuessed = true;
+                IO.println(GREEN + word + RESET);
                 IO.println("Congrats! You have successfully guessed the secret word");
             } else {
+                IO.println("Try again");
+
+                boolean[] used = new boolean[word.length()];
+                String[] colors = new String[guess.length()];
+
+                for (int i = 0; i < guess.length(); i++) {
+                    if (guess.charAt(i) == word.charAt(i)) {
+                        colors[i] = GREEN;
+                        used[i] = true;
+                    }
+                }
+
+                for (int i = 0; i < guess.length(); i++) {
+                    if (colors[i] != null) {
+                        continue;
+                    }
+
+                    colors[i] = GRAY;
+                    for (int j = 0; j < word.length(); j++) {
+                        if (used[j] == false && guess.charAt(i) == word.charAt(j)) {
+                            colors[i] = YELLOW;
+                            used[j] = true;
+                            break;
+                        }
+                    }
+                }
+
+                for (int i = 0; i < guess.length(); i++) {
+                    IO.print(colors[i] + guess.charAt(i) + RESET);
+                }
+                IO.println();
 
             }
-
             guesses++;
+        }
+
+        if (!wordGuessed && guesses == 6) {
+            IO.println("Out of tries! The secret word was: " + word);
         }
 
     }
