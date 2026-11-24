@@ -1,13 +1,16 @@
 import java.io.*;
+import java.util.Random;
+import java.util.random.*;
+
 public class GameData {
 
     private int rounds;
-   private int player1Wins;
-   private int player2Wins;
-   private int player1Losses;
-   private int player2Losses;
-   private double player1winPercentage;
-   private double player2winPercentage;
+    private int player1Wins;
+    private int player2Wins;
+    private int player1Losses;
+    private int player2Losses;
+    private double player1winPercentage;
+    private double player2winPercentage;
 
 
    public GameData() {
@@ -39,6 +42,37 @@ public class GameData {
        }
 
        return exists;
+
+   }
+
+   public String wordSelector(int letters) {
+
+       Random rand = new Random();
+
+       while (true) {
+
+           int randInt = rand.nextInt(this.getNumberOfWords());
+
+           int index = 0;
+
+           try (BufferedReader br = new BufferedReader(new FileReader("Words.txt"))) {
+
+               String line = "";
+               while ((line = br.readLine()) != null) {
+                   if (line.length() == letters && index == randInt) {
+                       return line;
+                   } else {
+                       index++;
+                   }
+               }
+
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
+       }
+
+
+
 
    }
 
@@ -96,6 +130,25 @@ public class GameData {
 
     public void calculatePlayer2WinPercentage() {
        player2winPercentage = (player2Wins / rounds) * 100;
+    }
+
+    public int getNumberOfWords() {
+
+       int count = 0;
+
+        try (BufferedReader br = new BufferedReader(new FileReader("Words.txt"))) {
+
+            String line = "";
+            while ((line = br.readLine()) != null) {
+                count++;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return count;
+
     }
 
 }
