@@ -400,6 +400,15 @@ public class Wordle {
                 int letters = Integer.parseInt(IO.readln("Please select the amount of letters you want to play for\n"));
                 IO.println();
 
+                while (true) {
+
+                    if (gameSession.atleastOneWord(letters) == false) {
+                        letters = Integer.parseInt(IO.readln("No words of that length found in word list, please select the amount of letters you want to play for again\n"));
+                    } else {
+                        break;
+                    }
+                }
+
                 String word = gameSession.wordSelector(letters);
 
                 IO.println("You have 6 tries to guess the secret word");

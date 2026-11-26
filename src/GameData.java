@@ -151,4 +151,29 @@ public class GameData {
 
     }
 
+    public boolean atleastOneWord(int letters) {
+
+        int count = 0;
+
+        try (BufferedReader br = new BufferedReader(new FileReader("Words.txt"))) {
+
+            String line = "";
+            while ((line = br.readLine()) != null) {
+                if (line.length() == letters) {
+                    count++;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (count == 0) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
 }
